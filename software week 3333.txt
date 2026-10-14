@@ -1,0 +1,215 @@
+# Practical Development Setup: Flutter, Python, MySQL, and VS Code Integration
+
+**Name:** [Your Full Name]  
+**Date:** 14 October 2026  
+**Course/Class Title:** Software Development
+
+# Section 1: Task 1 - Flutter & Dart Setup
+
+## 1.1 Verify Flutter Installation
+
+Command used:
+
+```bash
+flutter doctor
+```
+
+The `flutter doctor` command checks whether Flutter and the required development tools are installed and configured correctly.
+
+**Output Summary:**  
+[Paste the actual output of your `flutter doctor` command here.]
+
+## 1.2 Create a New Flutter Application
+
+Commands used:
+
+```bash
+flutter create my_first_app
+cd my_first_app
+flutter devices
+```
+
+The `flutter create my_first_app` command creates a new Flutter project named `my_first_app`. The `cd my_first_app` command opens the project directory. The `flutter devices` command lists the devices available for running the application.
+
+**Device Output:**  
+[Paste the actual output of your `flutter devices` command here.]
+
+## 1.3 Difference Between Hot Reload and Hot Restart
+
+**Hot Reload:** Hot Reload applies most code changes to a running Flutter application without restarting the entire application. It generally preserves the current application state. Developers use it to test changes to widgets, layouts, and user interface design quickly.
+
+**Hot Restart:** Hot Restart restarts the application and resets its in-memory state. Developers use it when they need the application to start again from its initial state.
+
+**Conclusion:** Hot Reload is useful for quick code changes, while Hot Restart is useful when a complete application restart is needed.
+
+# Section 2: Task 2 - MySQL Database Management
+
+## 2.1 Log In to MySQL
+
+Command used:
+
+```bash
+mysql -u root -p
+```
+
+This command logs in to the local MySQL server using the root account. The user enters the root password when prompted.
+
+## 2.2 SQL Script
+
+```sql
+CREATE DATABASE school;
+
+USE school;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(150) UNIQUE,
+    enrolled_on DATE
+);
+
+INSERT INTO students (name, email, enrolled_on)
+VALUES
+    ('Ahmed Ali', 'ahmed@example.com', '2026-10-01'),
+    ('Fatima Hassan', 'fatima@example.com', '2026-10-05');
+
+SELECT * FROM students;
+```
+
+## 2.3 Expected Query Results
+
+| id | name | email | enrolled_on |
+|---|---|---|---|
+| 1 | Ahmed Ali | ahmed@example.com | 2026-10-01 |
+| 2 | Fatima Hassan | fatima@example.com | 2026-10-05 |
+
+The `SELECT * FROM students;` command retrieves all records from the students table.
+
+**Screenshot:** Insert a screenshot of the actual MySQL terminal output showing the query results.
+
+## 2.4 Security Reflection
+
+Using the MySQL root account for direct application connections is poor security practice because root has extensive administrative privileges. If an application is compromised, an attacker could gain access to sensitive data, modify database structures, or delete important information.
+
+The principle of least privilege means giving each user only the permissions needed to perform their tasks.
+
+The following SQL commands create a dedicated application user:
+
+```sql
+CREATE USER 'school_app'@'localhost'
+IDENTIFIED BY 'Replace_With_A_Strong_Password';
+
+GRANT SELECT, INSERT, UPDATE
+ON school.*
+TO 'school_app'@'localhost';
+
+SHOW GRANTS FOR 'school_app'@'localhost';
+```
+
+The `SELECT` privilege allows reading data, `INSERT` allows adding records, and `UPDATE` allows modifying existing records. These permissions are limited to the `school` database.
+
+A strong, unique password should replace the placeholder password. The application should not use the root account for normal database operations.
+
+# Section 3: Task 3 - Python Virtual Environment
+
+## 3.1 Create the Project Directory
+
+Commands used in Windows PowerShell:
+
+```powershell
+mkdir python_setup_lab
+cd python_setup_lab
+```
+
+These commands create the project directory and move into it.
+
+## 3.2 Create and Activate the Virtual Environment
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+The first command creates an isolated virtual environment named `venv`. The second command activates it in Windows PowerShell.
+
+When the environment is active, the terminal prompt displays `(venv)`.
+
+## 3.3 Install and Verify the Requests Library
+
+```powershell
+python -m pip install requests
+python -m pip list
+```
+
+The first command installs the Requests library. The second command displays the installed Python packages so that the installation can be verified.
+
+## 3.4 Export the Environment Configuration
+
+```powershell
+python -m pip freeze > requirements.txt
+Get-Content requirements.txt
+```
+
+The `pip freeze` command exports the installed packages and their versions into `requirements.txt`. The `Get-Content` command displays the file contents.
+
+**Expected Project Structure:**
+
+```text
+python_setup_lab/
+├── venv/
+└── requirements.txt
+```
+
+The virtual environment isolates project dependencies from other Python projects. The requirements file makes it easier to reinstall the same package versions later.
+
+**Screenshot:** Insert a screenshot showing the active `(venv)` prompt, the Requests package, and the `requirements.txt` file contents.
+
+# Section 4: Task 4 - VS Code Workspace Screenshot
+
+## 4.1 Required Extensions
+
+The following extensions were required for the development environment:
+
+1. Flutter
+2. Dart
+3. Python
+4. Pylance
+5. MySQL
+
+The Flutter and Dart extensions support Flutter development. Python and Pylance provide Python language support, code completion, and error checking. A MySQL extension provides database-related tools in VS Code.
+
+## 4.2 Python Interpreter Configuration
+
+The Python interpreter should be selected from the project's virtual environment.
+
+Expected Windows interpreter path:
+
+```text
+python_setup_lab\venv\Scripts\python.exe
+```
+
+To select the interpreter, open the Command Palette using `Ctrl + Shift + P`, choose `Python: Select Interpreter`, and select the interpreter inside the `venv` directory.
+
+## 4.3 Screenshot Evidence
+
+Insert one full-screen screenshot of VS Code showing:
+
+- The Extensions panel with the required extensions installed.
+- The integrated terminal displaying the active `(venv)` prompt.
+- The bottom status bar showing the selected Python interpreter environment.
+
+**Screenshot:** [Insert your actual VS Code screenshot here.]
+
+# Conclusion
+
+This assignment covers the setup and verification of Flutter, MySQL, Python virtual environments, and VS Code. It demonstrates how to create a Flutter project, manage a MySQL database, isolate Python dependencies, and configure a development workspace.
+
+The assignment also explains the importance of database security and the principle of least privilege. These skills help developers create a more organized, secure, and reliable development environment.
+
+# Submission Checklist
+
+- Run the commands and replace the output placeholders with actual results.
+- Insert the required screenshots.
+- Check that the document is readable and correctly formatted.
+- Share the Google Doc using **Anyone with the link — Viewer**.
+- Copy the Google Docs link and submit it through the course portal.
